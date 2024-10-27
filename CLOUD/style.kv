@@ -1,0 +1,117 @@
+<WeatherScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: "20dp"
+        MDTopAppBar:
+            title: "LCloud"
+        MDBoxLayout:
+            spacing: "10dp"
+            size_hint: 0.9, None
+            pos_hint: {'center_x': 0.5}
+            MDTextField:
+                id: city
+                hint_text: "Введіть місто"
+                mode: "fill"
+            MDIconButton:
+                id: search_btn
+                on_press: root.search()
+                icon: "search-web"
+                icon_size: "32dp"
+                md_bg_color: app.theme_cls.primary_color
+        MDBoxLayout:
+            id: weather_panel
+            opacity: 0.0
+            orientation: 'vertical'
+            pos_hint: {'center_x': 0.5}
+            size_hint: 0.9, 0.9
+            spacing: "10dp"
+            AsyncImage:
+                id: icon 
+                size_hint: None, None
+                size: ("150dp", "150dp")
+                pos_hint: {'center_x': 0.5}
+                fit_mode: 'contain'
+                source: 'https://openweathermap.org/img/wn/10d@2x.png'
+                nocache: True
+            MDLabel:
+                id: temp
+                text: "14°C"
+                font_style: 'H1'
+                halign: 'center'
+            MDLabel:
+                id: feels_like
+                text: "Відчувається як"
+                font_style: 'Caption'
+                halign: 'center'
+            MDLabel:
+                id: desc
+                text: "Ясно "
+                font_style: 'H4'
+                halign: 'center'
+            MDLabel:
+                id: humidity
+                text: "Вологість:"
+                font_style: 'Body1'
+                halign: 'center'
+            MDLabel:
+                id: wind
+                text: "Вітер:"
+                font_style: 'Body1'
+                halign: 'center'
+            Widget:
+                size_hint_y: None
+                height: "50dp"
+            MDFillRoundFlatButton:
+                text: "Дивитися прогноз"
+                pos_hint: {'center_x': 0.5}
+                on_press: root.show_forecast()
+            Widget:
+                size_hint_y: None
+                height: "50dp"
+
+<ForecastScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: "20dp"
+        MDTopAppBar:
+            title: "Прогноз погоди"
+            left_action_items: [["arrow-left", lambda x: root.back()]]
+        ScrollView:
+            pos_hint: {'center_x': 0.5}
+            size_hint: 0.9, 0.9
+            MDBoxLayout:
+                id: weather_list
+                orientation: 'vertical'
+                pos_hint: {'center_x': 0.5}
+                size_hint: 1, None
+                height: self.minimum_height
+                spacing: "10dp"
+
+<WeatherCard>:
+    padding: 4
+    size_hint: 1, None
+    height: "200dp"
+    MDBoxLayout:
+        padding: 10
+        MDLabel:
+            id: date
+            text: "Дата"
+            font_style: 'Subtitle1'
+            halign: 'center'
+        AsyncImage:
+            id: icon 
+            size_hint: None, None
+            size: ("50dp", "50dp")
+            pos_hint: {'center_x': 0.5}
+            fit_mode: 'contain'
+            source: 'https://openweathermap.org/img/wn/10d@2x.png'
+        MDLabel:
+            id: temp
+            text: "14°C"
+            font_style: 'H5'
+            halign: 'center'
+        MDLabel:
+            id: desc
+            text: "Ясно"
+            font_style: 'Body1'
+            halign: 'center'
